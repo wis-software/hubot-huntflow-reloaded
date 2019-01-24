@@ -1,0 +1,38 @@
+{
+  "name": "hubot-huntflow-reloaded",
+  "description": "Hubot script to leverage some of the Huntflow facilities",
+  "version": "0.0.1",
+  "authors": [
+    "Evgeny Golyshev <eugulixes@gmail.com>"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "hubot",
+    "hubot-scripts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tolstoyevsky/hubot-huntflow-reloaded.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tolstoyevsky/hubot-huntflow-reloaded/issues"
+  },
+  "dependencies": {
+    "hubot-routines": "https://github.com/tolstoyevsky/hubot-routines.git",
+    "ioredis": "^4.0.5",
+    "moment": "^2.22.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "pretest": "npm run lint",
+    "test": "echo \"No tests\""
+  }
+}

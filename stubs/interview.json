@@ -1,0 +1,19 @@
+{
+    "account": {
+        "id": 1,
+        "name": "Noname"
+    },
+    "event": {
+        "created": "%CREATED_DATE%",
+        "type": "STATUS",
+        "applicant": {
+            "id": 1,
+            "first_name": "Matt",
+            "last_name": "Groening"
+        },
+        "calendar_event": {
+            "start": "1989-12-17T00:00:00+03:00",
+            "end": "1989-12-17T01:00:00+03:00"
+        }
+    }
+}

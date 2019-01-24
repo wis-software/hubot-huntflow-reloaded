@@ -1,0 +1,3 @@
+fakeredis==0.16.*
+redis==3.0.*
+tornado==5.1.*
