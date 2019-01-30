@@ -19,6 +19,14 @@ LOGLEVEL=${LOGLEVEL:="info"}
 
 LOG_FILE=${LOG_FILE:="/var/log/huntflow-reloaded-server.log"}
 
+POSTGRES_DBNAME=${POSTGRES_DBNAME=""}
+
+POSTGRES_HOST=${POSTGRES_HOST="127.0.0.1"}
+
+POSTGRES_PASS=${POSTGRES_PASS=""}
+
+POSTGRES_USER=${POSTGRES_USER="postgres"}
+
 REDIS_HOST=${REDIS_HOST:="127.0.0.1"}
 
 REDIS_PASSWORD=${REDIS_PASSWORD:=""}
@@ -34,6 +42,14 @@ set +x
 args=()
 
 args+=( --logging="${LOGLEVEL}" )
+
+args+=( --postgres_dbname="${POSTGRES_DBNAME}" )
+
+args+=( --postgres_host="${POSTGRES_HOST}" )
+
+args+=( --postgres_pass="${POSTGRES_PASS}" )
+
+args+=( --postgres_user="${POSTGRES_USER}" )
 
 args+=( --redis-host="${REDIS_HOST}" )
 
