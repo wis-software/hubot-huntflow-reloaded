@@ -32,6 +32,11 @@ define('channel-name',
             'the bot',
        default='hubot-huntflow-reloaded')
 define('port', help='listen on a specific port', default=8888)
+define('postgres_dbname', help='specify Postgres database name', default='')
+define('postgres_host', help='specify Postgres hostname and port', default='localhost')
+define('postgres_pass', help='specify Postgres password', default='')
+define('postgres_port', help='specify Postgres port', default='5432')
+define('postgres_user', help='specify Postgres username', default='postgres')
 define('redis-host', help='specify Redis host', default='localhost')
 define('redis-password', help='specify Redis password', default='')
 define('redis-port', help='specify Redis port', default=6379)
@@ -54,6 +59,7 @@ def main():
 
     models.gino_run(username=options.postgres_user,
                     password=options.postgres_pass,
+                    port=options.postgres_port,
                     hostname=options.postgres_host,
                     dbname=options.postgres_dbname)
 
