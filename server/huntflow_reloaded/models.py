@@ -9,7 +9,7 @@ DB = Gino()
 class Candidate(DB.Model):
     """ Candidate for vacancy model """
 
-    __tablename__ = 'Candidates'
+    __tablename__ = 'candidates'
 
     id = DB.Column(DB.Integer())
 
@@ -21,14 +21,14 @@ class Candidate(DB.Model):
 class Inerview(DB.Model):
     """ Interview event model """
 
-    __tablename__ = 'Inerviews'
+    __tablename__ = 'inerviews'
 
     id = DB.Column(DB.Integer(), primary_key=True, autoincrement=True)
 
     created = DB.Column(DB.DateTime())
     type = DB.Column(DB.String())
 
-    candidate = DB.Column(DB.Integer(), DB.ForeignKey('Candidates.id'))
+    candidate = DB.Column(DB.Integer(), DB.ForeignKey('candidates.id'))
 
     start = DB.Column(DB.DateTime())
     end = DB.Column(DB.DateTime())
@@ -36,8 +36,8 @@ class Inerview(DB.Model):
     __table_args__ = (DB.UniqueConstraint('id'))
 
 async def gino_run(**kwargs):
-    """ Connecting to the database and creating models """
+    """ Set up connection to the database """
 
-    postgres_url = 'postgresql://%(username)s:%(password)s@%(hostname)s:%(port)s/%(dbname)s'
+    postgres_url = 'postgresql://{username}:{password}@{hostname}:{port}/{dbname}'
 
-    await DB.set_bind(postgres_url % kwargs)
+    await DB.set_bind(postgres_url.format(**kwargs))

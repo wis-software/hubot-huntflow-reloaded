@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import fakeredis
+import testing.postgresql
 from tornado.testing import AsyncHTTPTestCase
 from tornado.web import Application
 
@@ -46,17 +47,31 @@ class WebTestCase(AsyncHTTPTestCase):
         self.app = Application(self.get_handlers(), **self.get_app_kwargs())
         return self.app
 
+    def setUp(self):
+        super(WebTestCase, self).setUp()
+        self._mock_postgres = testing.postgresql.Postgresql(port=5432)
+
     def get_handlers(self):
         raise NotImplementedError()
 
     def get_app_kwargs(self):
         return {}
 
+    def tearDown(self):
+        super(WebTestCase, self).tearDown()
+        self._mock_postgres.stop()
 
 class HuntflowWebhookHandlerTest(WebTestCase):
     def get_handlers(self):
         conn = fakeredis.FakeStrictRedis()
         args = {
+            'postgres': {
+                'dbname': 'test',
+                'hostname': 'localhost',
+                'password': '',
+                'port': '5432',
+                'username': 'postgres',
+            },
             'redis_conn': conn,
             'channel_name': 'stub',
         }

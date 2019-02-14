@@ -22,7 +22,7 @@ import redis
 import tornado.ioloop
 from tornado.options import define, options
 
-from huntflow_reloaded import handler, models
+from huntflow_reloaded import handler
 
 LOGGER = logging.getLogger('tornado.application')
 
@@ -57,13 +57,14 @@ def main():
         sys.stderr.write('Could not connect to Redis\n')
         sys.exit(1)
 
-    models.gino_run(username=options.postgres_user,
-                    password=options.postgres_pass,
-                    port=options.postgres_port,
-                    hostname=options.postgres_host,
-                    dbname=options.postgres_dbname)
-
     args = {
+        'postgres': {
+            'dbname': options.postgres_dbname,
+            'hostname': options.postgres_host,
+            'password': options.postgres_pass,
+            'port': options.postgres_port,
+            'username': options.postgres_user,
+        },
         'redis_conn': conn,
         'channel_name': options.channel_name,
     }
