@@ -21,6 +21,7 @@ import logging
 from tornado.escape import json_decode
 from tornado.web import RequestHandler
 
+from huntflow_reloaded import models
 
 class IncompleteRequest(Exception):
     """Exception raised when receiving a request of a specific type but not
@@ -51,6 +52,7 @@ class HuntflowWebhookHandler(RequestHandler):  # pylint: disable=abstract-method
         'REMOVED': REMOVED_TYPE,
         'STATUS': STATUS_TYPE,
     }
+    GINO_CONNECTED = False
 
     def __init__(self, application, request, **kwargs):
         super(HuntflowWebhookHandler, self).__init__(application, request,
@@ -68,9 +70,10 @@ class HuntflowWebhookHandler(RequestHandler):  # pylint: disable=abstract-method
                 val = self._get_attr_or_stub('{}_handler'.format(i.lower()))
                 self._handlers[key] = val
 
-    def initialize(self, redis_conn, channel_name):  # pylint: disable=arguments-differ
+    def initialize(self, redis_conn, channel_name, postgres):  # pylint: disable=arguments-differ
         self._channel_name = channel_name
         self._redis_conn = redis_conn
+        self._postgres_data = postgres
 
     def _classify_request(self):
         try:
@@ -83,6 +86,12 @@ class HuntflowWebhookHandler(RequestHandler):  # pylint: disable=abstract-method
         except KeyError:
             raise UnknownType
 
+    async def _connect_to_database(self):
+        """ Connecting to ORM if not connected already """
+        if not HuntflowWebhookHandler.GINO_CONNECTED:
+            await models.gino_run(**self._postgres_data)
+            HuntflowWebhookHandler.GINO_CONNECTED = True
+
     def _get_attr_or_stub(self, attribute_name):
         try:
             return getattr(self, attribute_name)
@@ -92,8 +101,10 @@ class HuntflowWebhookHandler(RequestHandler):  # pylint: disable=abstract-method
     def _process_request(self):
         pass
 
-    def post(self):  # pylint: disable=arguments-differ
+    async def post(self):  # pylint: disable=arguments-differ
         body = self.request.body.decode('utf8')
+
+        await self._connect_to_database()
 
         try:
             self._decoded_body = json_decode(body)
