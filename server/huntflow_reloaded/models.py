@@ -38,6 +38,6 @@ class Inerview(DB.Model):
 async def gino_run(**kwargs):
     """ Connecting to the database and creating models """
 
-    postgres_url = 'postgresql://%(username)s:%(password)s@%(hostname)s/%(dbname)s'
+    postgres_url = 'postgresql://%(username)s:%(password)s@%(hostname)s:%(port)s/%(dbname)s'
 
     await DB.set_bind(postgres_url % kwargs)

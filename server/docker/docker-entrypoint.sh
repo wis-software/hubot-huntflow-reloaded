@@ -25,6 +25,8 @@ POSTGRES_HOST=${POSTGRES_HOST="127.0.0.1"}
 
 POSTGRES_PASS=${POSTGRES_PASS=""}
 
+POSTGRES_PORT=${POSTGRES_PORT="5432"}
+
 POSTGRES_USER=${POSTGRES_USER="postgres"}
 
 REDIS_HOST=${REDIS_HOST:="127.0.0.1"}
@@ -48,6 +50,8 @@ args+=( --postgres_dbname="${POSTGRES_DBNAME}" )
 args+=( --postgres_host="${POSTGRES_HOST}" )
 
 args+=( --postgres_pass="${POSTGRES_PASS}" )
+
+args+=( --postgres_port="${POSTGRES_PORT}" )
 
 args+=( --postgres_user="${POSTGRES_USER}" )
 
