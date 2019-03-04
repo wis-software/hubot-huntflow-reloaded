@@ -11,8 +11,13 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 RUN apk --update add \
     curl \
     bash \
+    gcc \
     git \
-    python3 \
+    musl-dev \
+    postgresql-client \
+    postgresql-dev \
+    python3-dev \
+    sudo \
  && cd \
  && git clone -b $BRANCH https://github.com/tolstoyevsky/hubot-huntflow-reloaded.git \
  && cd hubot-huntflow-reloaded \
@@ -22,6 +27,8 @@ RUN apk --update add \
  && chmod +x wait-for-it.sh \
  # Cleanup
  && apk del \
+    curl \
+    gcc \
     git \
  && rm -rf /var/cache/apk/*
 
