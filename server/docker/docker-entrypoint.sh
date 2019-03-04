@@ -19,15 +19,15 @@ LOGLEVEL=${LOGLEVEL:="info"}
 
 LOG_FILE=${LOG_FILE:="/var/log/huntflow-reloaded-server.log"}
 
-POSTGRES_DBNAME=${POSTGRES_DBNAME=""}
+POSTGRES_DBNAME=${POSTGRES_DBNAME:="huntflow-reloaded"}
 
-POSTGRES_HOST=${POSTGRES_HOST="127.0.0.1"}
+POSTGRES_HOST=${POSTGRES_HOST:="127.0.0.1"}
 
-POSTGRES_PASS=${POSTGRES_PASS=""}
+POSTGRES_PASSWORD=${POSTGRES_PASSWORD:=""}
 
-POSTGRES_PORT=${POSTGRES_PORT="5432"}
+POSTGRES_PORT=${POSTGRES_PORT:="5432"}
 
-POSTGRES_USER=${POSTGRES_USER="postgres"}
+POSTGRES_USER=${POSTGRES_USER:="postgres"}
 
 REDIS_HOST=${REDIS_HOST:="127.0.0.1"}
 
@@ -37,9 +37,31 @@ REDIS_PORT=${REDIS_PORT:="16379"}
 
 set +x
 
+if [ -z "${POSTGRES_PASSWORD}" ]; then
+    >&2 echo "Postgres password is not specified"
+    exit 1
+fi
+
 >&2 echo "Waiting for Redis"
 
 ./bin/wait-for-it.sh -h "${REDIS_HOST}" -p "${REDIS_PORT}" -t 90 -- >&2 echo "Redis is ready"
+
+>&2 echo "Waiting for Postgres"
+
+./bin/wait-for-it.sh  -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -t 90 -- >&2 echo "Postgres is ready"
+
+output="$(PGPASSWORD="${POSTGRES_PASSWORD}" psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -lqt| cut -d \| -f 1 | grep "${POSTGRES_DBNAME}")"
+
+if [ "${output}" ]; then
+    >&2 echo "Database ${POSTGRES_DBNAME} exists"
+else
+    >&2 echo "Creating the ${POSTGRES_DBNAME} database"
+
+    PGPASSWORD="${POSTGRES_PASSWORD}" createdb -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" "${POSTGRES_DBNAME}"
+fi
+
+>&2 echo "Apply migrations"
+./alembic/migrate.sh postgresql://"${POSTGRES_USER}":"${POSTGRES_PASS}"@"${POSTGRES_HOST}":"${POSTGRES_PORT}"/"${POSTGRES_DBNAME}"
 
 args=()
 
@@ -49,7 +71,7 @@ args+=( --postgres_dbname="${POSTGRES_DBNAME}" )
 
 args+=( --postgres_host="${POSTGRES_HOST}" )
 
-args+=( --postgres_pass="${POSTGRES_PASS}" )
+args+=( --postgres_pass="${POSTGRES_PASSWORD}" )
 
 args+=( --postgres_port="${POSTGRES_PORT}" )
 
