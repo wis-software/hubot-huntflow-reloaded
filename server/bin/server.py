@@ -21,6 +21,7 @@ import sys
 import redis
 import tornado.ioloop
 from tornado.options import define, options
+from aiologger import Logger as async_logger
 
 import huntflow_reloaded.scheduler
 from huntflow_reloaded import handler
@@ -60,6 +61,7 @@ def main():
         sys.exit(1)
 
     args = {
+        'logger' : async_logger.with_default_handlers(name='tornado.application'),
         'postgres': {
             'dbname': options.postgres_dbname,
             'hostname': options.postgres_host,

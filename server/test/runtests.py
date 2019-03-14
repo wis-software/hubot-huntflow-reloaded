@@ -18,6 +18,7 @@ import fakeredis
 import subprocess
 import sqlalchemy as sa  # Tests are running synchronously so we have to use sqlalchemy instead of gino.
 import testing.postgresql
+from aiologger import Logger
 from tornado.ioloop import IOLoop
 from tornado.testing import AsyncHTTPTestCase
 from tornado.web import Application
@@ -86,7 +87,9 @@ class WebTestCase(AsyncHTTPTestCase):
 class HuntflowWebhookHandlerTest(WebTestCase):
     def get_handlers(self):
         conn = fakeredis.FakeStrictRedis()
+        logger = Logger.with_default_handlers()
         args = {
+            'logger': logger,
             'postgres': {
                 'dbname': 'test',
                 'hostname': 'localhost',
