@@ -21,7 +21,8 @@ import sys
 import redis
 import tornado.ioloop
 from tornado.options import define, options
-from aiologger import Logger as async_logger
+from aiologger.loggers.json import JsonLogger
+from aiologger.handlers.files import AsyncFileHandler
 
 import huntflow_reloaded.scheduler
 from huntflow_reloaded import handler
@@ -60,8 +61,14 @@ def main():
         sys.stderr.write('Could not connect to Redis\n')
         sys.exit(1)
 
+
+    logger = JsonLogger.with_default_handlers(name='tornado.application',
+                                              serializer_kwargs={'indent': 4},
+                                              level=logging.DEBUG)
+
+
     args = {
-        'logger' : async_logger.with_default_handlers(name='tornado.application'),
+        'logger' : logger,
         'postgres': {
             'dbname': options.postgres_dbname,
             'hostname': options.postgres_host,

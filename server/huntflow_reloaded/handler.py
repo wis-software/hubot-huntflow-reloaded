@@ -21,6 +21,7 @@ from datetime import datetime
 
 from tornado.escape import json_decode
 from tornado.web import RequestHandler
+from aiologger.handlers.files import AsyncFileHandler
 
 import huntflow_reloaded.scheduler
 from huntflow_reloaded import models
@@ -76,6 +77,9 @@ class HuntflowWebhookHandler(RequestHandler):  # pylint: disable=abstract-method
         self._redis_conn = redis_conn
         self._postgres_data = postgres
         self._logger = logger
+        handler = AsyncFileHandler(
+            filename='/var/log/huntflow-reloaded-server.log')
+        self._logger.addHandler(handler)
 
     def _classify_request(self):
         try:
