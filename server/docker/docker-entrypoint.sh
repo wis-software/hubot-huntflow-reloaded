@@ -21,7 +21,7 @@ LOGLEVEL=${LOGLEVEL:="info"}
 
 LOG_FILE=${LOG_FILE:="/var/log/huntflow-reloaded-server.log"}
 
-POSTGRES_DBNAME=${POSTGRES_DBNAME:="huntflow-reloaded"}
+POSTGRES_DBNAME=${POSTGRES_DBNAME:="huntflow_reloaded"}
 
 POSTGRES_HOST=${POSTGRES_HOST:="127.0.0.1"}
 

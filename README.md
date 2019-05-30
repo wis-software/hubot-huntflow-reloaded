@@ -95,7 +95,7 @@ The server can be configured via the following command line options or environme
 |-------------------------|------------------------|--------------------------------------------------------------------------------|-------------------------------------------|
 |`LOGLEVEL`               | `--logging`            | Logs level.                                                                    | `info`                                    |
 |`LOG_FILE`               | `--log-file-prefix`    | File where log information will be stored.                                     | `/var/log/huntflow-reloaded-server.log`   |
-|`POSTGRES_DBNAME`        | `--postgres-dbname`    | Database name.                                                                 | `huntflow-reloaded`                       |
+|`POSTGRES_DBNAME`        | `--postgres-dbname`    | Database name.                                                                 | `huntflow_reloaded`                       |
 |`POSTGRES_HOST`          | `--postgres-host`      | PostgreSQL host.                                                               | 127.0.0.1                                 |
 |`POSTGRES_PORT`          | `--postgres-port`      | Port PostgreSQL listens on.                                                    | `5432`                                    |
 |`POSTGRES_USER`          | `--postgres-user`      | PostgreSQL user name.                                                          | postgres                                  |
