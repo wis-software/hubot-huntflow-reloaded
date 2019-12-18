@@ -37,5 +37,5 @@ services:
     image: cusdeb/redis:5.0-amd64
     network_mode: "host"
     environment:
-    - REDIS_CONF_bind=127.0.0.1
-    - REDIS_CONF_port=16379
+    - REDIS_CONF_bind=${REDIS_HOST}
+    - REDIS_CONF_port=${REDIS_PORT}
