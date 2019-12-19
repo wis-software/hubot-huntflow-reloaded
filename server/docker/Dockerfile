@@ -6,7 +6,7 @@ ENV BRANCH master
 ARG VCS_REF
 
 LABEL org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/tolstoyevsky/hubot-huntflow-reloaded"
+      org.label-schema.vcs-url="https://github.com/wis-software/hubot-huntflow-reloaded"
 
 RUN apk --update add \
     curl \
@@ -19,7 +19,7 @@ RUN apk --update add \
     python3-dev \
     sudo \
  && cd \
- && git clone -b $BRANCH https://github.com/tolstoyevsky/hubot-huntflow-reloaded.git \
+ && git clone -b $BRANCH https://github.com/wis-software/hubot-huntflow-reloaded.git \
  && cd hubot-huntflow-reloaded \
  && pip3 install -r server/requirements.txt \
  && cd server/bin \

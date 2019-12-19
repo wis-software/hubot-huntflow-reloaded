@@ -33,7 +33,7 @@ The client is a Hubot script intended to receive the reminders from the Redis ch
 
 In hubot project repo, run:
 
-`npm install git+https://github.com/tolstoyevsky/hubot-huntflow-reloaded --save`
+`npm install git+https://github.com/wis-software/hubot-huntflow-reloaded --save`
 
 Then add **hubot-huntflow-reloaded** to your `external-scripts.json`:
 
@@ -133,7 +133,7 @@ The server can be configured via the following command line options or environme
     
     Notice, that `docker-compose` runs three containers and if something goes wrong you need to look at `huntflow-reloaded-server` logs first of all to get to the bottom of the problem.
     
-3. Deploy the Rocket.Chat server locally and run Hubot. For the details see Rocket.Chat [README](https://github.com/tolstoyevsky/mmb/tree/master/rocketchat), Rocket.Chat Hubot adapter [README](https://github.com/tolstoyevsky/mmb/tree/master/hubot-rocketchat) and [client configuration](#configuration) section.
+3. Deploy the Rocket.Chat server locally and run Hubot. For the details see Rocket.Chat [README](https://github.com/wis-software/mmb/tree/master/rocketchat), Rocket.Chat Hubot adapter [README](https://github.com/wis-software/mmb/tree/master/hubot-rocketchat) and [client configuration](#configuration) section.
     The Hubot runs also the Redis server. If you don't need the client run the Redis server manually.
     
     ```bash
@@ -202,7 +202,7 @@ You can emulate the following actions:
      curl -vX POST http://127.0.0.1:8888/token -d @stubs/auth.json --header "Content-Type: application/json"
     ```
     It returns the valid token pair if user is registered.
-    For the details of registering a new user see the CLI [README](https://github.com/tolstoyevsky/hubot-huntflow-reloaded/tree/master/cli/README.md).
+    For the details of registering a new user see the CLI [README](https://github.com/wis-software/hubot-huntflow-reloaded/tree/master/cli/README.md).
     
 - deleting interview of the specified candidate
 
@@ -218,8 +218,8 @@ You can emulate the following actions:
     ```
     
     For the details check the API 
-    [README](https://github.com/tolstoyevsky/hubot-huntflow-reloaded/blob/master/docs/API_README.md)
-    and CLI [README](https://github.com/tolstoyevsky/hubot-huntflow-reloaded/tree/master/cli/README.md).
+    [README](https://github.com/wis-software/hubot-huntflow-reloaded/blob/master/docs/API_README.md)
+    and CLI [README](https://github.com/wis-software/hubot-huntflow-reloaded/tree/master/cli/README.md).
 
 - retrieving the first working day of the specified candidate
 
@@ -238,8 +238,8 @@ You can emulate the following actions:
 
     ```
     For the details check the API
-    [README](https://github.com/tolstoyevsky/hubot-huntflow-reloaded/blob/master/docs/API_README.md)
-    and CLI [README](https://github.com/tolstoyevsky/hubot-huntflow-reloaded/tree/master/cli/README.md).
+    [README](https://github.com/wis-software/hubot-huntflow-reloaded/blob/master/docs/API_README.md)
+    and CLI [README](https://github.com/wis-software/hubot-huntflow-reloaded/tree/master/cli/README.md).
 
 ### Known issues
 
@@ -250,7 +250,7 @@ Remove `network_mode: "host"` and instead specify the ports PostgreSQL and Redis
 ports:
     - "5432:5432"
 ```
-Also, see the Rocket.Chat Hubot adapter [README](https://github.com/tolstoyevsky/mmb/tree/master/hubot-rocketchat#known-issues) for details how to run it on macOS.
+Also, see the Rocket.Chat Hubot adapter [README](https://github.com/wis-software/mmb/tree/master/hubot-rocketchat#known-issues) for details how to run it on macOS.
 
 ## Authors
 

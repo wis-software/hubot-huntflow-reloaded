@@ -12,14 +12,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tolstoyevsky/hubot-huntflow-reloaded.git"
+    "url": "git://github.com/wis-software/hubot-huntflow-reloaded.git"
   },
   "bugs": {
-    "url": "https://github.com/tolstoyevsky/hubot-huntflow-reloaded/issues"
+    "url": "https://github.com/wis-software/hubot-huntflow-reloaded/issues"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "hubot-routines": "https://github.com/tolstoyevsky/hubot-routines.git",
+    "hubot-routines": "https://github.com/wis-software/hubot-routines.git",
     "ioredis": "^4.0.5",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2"
