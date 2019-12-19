@@ -1,7 +1,7 @@
 version: "2"
 services:
   huntflow-reloaded-server:
-    image: huntflow-reloaded-server
+    image: wissoft/huntflow-reloaded-server
     network_mode: "host"
     environment:
     - CHANNEL_NAME=${CHANNEL_NAME}
@@ -34,7 +34,7 @@ services:
     volumes:
       - /srv/postgres-hf-data:/var/lib/postgresql/data
   redis:
-    image: cusdeb/redis:5.0-amd64
+    image: wissoft/redis:5.0-amd64
     network_mode: "host"
     environment:
     - REDIS_CONF_bind=${REDIS_HOST}
