@@ -83,6 +83,8 @@ fi
 
 args=()
 
+args+=( --port="${PORT}")
+
 args+=( --channel-name="${CHANNEL_NAME}")
 
 args+=( --logging="${LOGLEVEL}" )
