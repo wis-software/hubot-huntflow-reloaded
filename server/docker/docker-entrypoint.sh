@@ -53,6 +53,8 @@ SENDER_PASSWORD=${SENDER_PASSWORD}
 
 TZ=${TZ:="Europe/Moscow"}
 
+PORT=${PORT:="8888"}
+
 set +x
 
 if [ -z "${POSTGRES_PASSWORD}" ]; then

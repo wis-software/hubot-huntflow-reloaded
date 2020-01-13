@@ -35,7 +35,7 @@ define('channel-name',
        help='specify the channel name which is used for communicating with '
             'the bot',
        default='hubot-huntflow-reloaded')
-define('port', help='listen on a specific port', default=8888)
+define('port', help='listen on a specific port', default='8888')
 define('postgres-dbname', help='specify Postgres database name',
        default='huntflow-reloaded')
 define('postgres-host', help='specify Postgres hostname and port', default='localhost')
