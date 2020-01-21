@@ -39,6 +39,10 @@ const makeMessageFromEventJSON = (json) => {
     message += ' (перенесено)'
   }
 
+  if (json.vacancy_id && json.vacancy_position) {
+    message += `\n${json.vacancy_position}`
+  }
+
   return message
 }
 

@@ -243,6 +243,13 @@ class HuntflowWebhookHandler(HuntflowBaseHandler):  # pylint: disable=abstract-m
         interview_start = get_date_from_string(start)
         interview_end = get_date_from_string(_end)
 
+        if self.event.get('vacancy'):
+            vacancy_id = self.event['vacancy'].get('id')
+            vacancy_position = self.event['vacancy'].get('position')
+        else:
+            vacancy_id = None
+            vacancy_position = None
+
         today = datetime.now()
 
         options = {
@@ -250,7 +257,9 @@ class HuntflowWebhookHandler(HuntflowBaseHandler):  # pylint: disable=abstract-m
             "type": self.event.get('type'),
             "candidate": _id,
             "start": interview_start,
-            "end": interview_end
+            "end": interview_end,
+            "vacancy_id": vacancy_id,
+            "vacancy_position": vacancy_position
         }
 
         interview = await models.Interview.create(**options)
@@ -262,6 +271,8 @@ class HuntflowWebhookHandler(HuntflowBaseHandler):  # pylint: disable=abstract-m
             "first_name": self.basic_attrs['first_name'],
             "last_name": self.basic_attrs['last_name'],
             "start": start,
+            "vacancy_id": vacancy_id,
+            "vacancy_position": vacancy_position
         }
 
         message_to_be_scheduled = self.message.copy()

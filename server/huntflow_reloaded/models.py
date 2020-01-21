@@ -44,6 +44,9 @@ class Interview(DB.Model):
     start = DB.Column(DB.DateTime())  # pylint: disable=maybe-no-member
     end = DB.Column(DB.DateTime())  # pylint: disable=maybe-no-member
 
+    vacancy_id = DB.Column(DB.Integer())  # pylint: disable=maybe-no-member
+    vacancy_position = DB.Column(DB.String())  # pylint: disable=maybe-no-member
+
     jobs = DB.Column(DB.JSON())  # pylint: disable=maybe-no-member
 
     __table_args__ = (DB.UniqueConstraint('id'))  # pylint: disable=maybe-no-member
